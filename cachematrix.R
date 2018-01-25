@@ -1,15 +1,23 @@
-## Put comments here that give an overall description of what your
-## functions do
+# NOTE:  singular matrices' inverse could not be computed, and the default could be directly used
+#        please run the makeCacheMatrix FIRST, then run cachesolve 
 
-## Write a short comment describing this function
-
-makeCacheMatrix <- function(x = matrix()) {
-
+makeCacheMatrix <- function(x = matrix(c(8,3,4,1,5,9,6,7,2),3), Inv = TRUE){  # if you don't want to compute invserse in this function, please 
+        inv <<- NULL                                                          # set Inv = 0. e.g. makeCacheMatrix(x = matrix(...), 0)
+        x <<- x  #save matrix x into cache
+                if (Inv == TRUE){
+                        inv <<- solve(x)  # save inv(x) into cache 
+                        }
 }
 
 
-## Write a short comment describing this function
 
-cacheSolve <- function(x, ...) {
-        ## Return a matrix that is the inverse of 'x'
+
+
+cacheSolve <- function(x) {
+        if(!is.null(inv)){
+                print('load the value from cache')
+                return(inv)}
+        else {
+                print('computing the inverse')
+                return(solve(x))}
 }
